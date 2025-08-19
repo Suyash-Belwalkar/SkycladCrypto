@@ -25,9 +25,9 @@ struct ContentView1: View {
         GeometryReader { bounds in
                     SegmentControlView(segments: Segment.allCases,
                                        selected: $selectedSegment2,
-                                       titleNormalColor: themeColor,
+                                       titleNormalColor: .white,
                                        titleSelectedColor: .white,
-                                       bgColor: themeColor,
+                                       bgColor: .black,
                                        animation: animation) { segment in
                         Image( segment.icon)
                             .font(.system(size: 20, weight: .bold, design: .rounded))

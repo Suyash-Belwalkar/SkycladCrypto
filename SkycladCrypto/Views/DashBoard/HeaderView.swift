@@ -22,7 +22,7 @@ struct HeaderView: View {
                         Button{
                             //sheet present
                         }label: {
-                            Image("List")
+                            Image(systemName: "line.3.horizontal")
                                 .foregroundStyle(.white)
                                 .font(.title)
                                 .padding(.leading)
@@ -33,7 +33,7 @@ struct HeaderView: View {
                         Button{
                             //sheet present
                         }label: {
-                            Image( "Bell")
+                            Image( systemName: "bell")
                                 .foregroundStyle(.white)
                                 .font(.title)
                                 .padding(.trailing)

@@ -18,14 +18,13 @@ struct ContentView2: View {
         GeometryReader { bounds in
             SegmentControlView2(segments: Segment2.allCases,
                                        selected: $selectedSegment2,
-                                        titleNormalColor: themeColor,
+                                titleNormalColor: .white,
                                        titleSelectedColor: .white,
                                         bgColor: Color.black,
                                        animation: animation) { segment in
                         Text("\(segment.title)")
                             .padding(.horizontal, 20)
                             .padding(.vertical, 8)
-                            .foregroundStyle(.white)
                     } background: {
                         RoundedRectangle(cornerRadius: 20, style: .continuous)
                     }

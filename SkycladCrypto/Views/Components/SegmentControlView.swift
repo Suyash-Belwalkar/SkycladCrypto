@@ -74,7 +74,7 @@ fileprivate struct NewSegmentButtonView<ID: Identifiable, Content: View, Backgro
             .frame(width: bounds.size.width, height: bounds.size.height)
             .scaleEffect(selectedId.id == id.id ? 1 : 0.8)
             .clipShape(background())
-            .foregroundColor(selectedId.id == id.id ? titleSelectedColor : titleNormalColor)
+            .foregroundColor(selectedId.id == id.id ? .white : .white)
             .background(buttonBackground)
         }
     }

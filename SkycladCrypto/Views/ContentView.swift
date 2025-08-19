@@ -28,14 +28,14 @@ struct ContentView: View {
     
     let tabItems = [
         (icon: "chart.line.uptrend.xyaxis", title: "Analytics"),
-        (icon: "arrow.triangle.2.circlepath", title: "Exchange"),
-        (icon: "book.pages", title: "Record"),
+        (icon: "arrow.trianglehead.2.clockwise.rotate.90", title: "Exchange"),
+        (icon: "list.bullet", title: "Record"),
         (icon: "wallet.bifold", title: "Wallet")
     ]
     
     var body: some View {
-        ZStack {
-            VStack {
+        NavigationStack{
+            ZStack {
                 Group {
                     switch selectedTab {
                     case 0: DashBoardView()
@@ -45,71 +45,86 @@ struct ContentView: View {
                     default: DashBoardView()
                     }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black.ignoresSafeArea())
                 
-                Spacer()
-                
-                HStack(spacing: 0) {
+                VStack {
+                    Spacer()
                     ZStack {
-                        RoundedRectangle(cornerRadius: 30)
-                            .fill(Color(hex: "#16181c"))
-                            .frame(height: 65)
+                        
+                        RoundedRectangle(cornerRadius: 40)
+                            .fill(Color.black.opacity(0.5))
+                            .frame(height: 100)
+                            .blur(radius: 8)
+                            .padding(.bottom)
                         
                         HStack(spacing: 0) {
-                            ForEach(0..<tabItems.count, id: \.self) { index in
-                                Capsule()
-                                    .fill(selectedTab == index ? Color(hex: "#0c15b3") : Color.clear)
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 55)
-                                    .padding(.horizontal, 4)
-                                    .padding(.vertical, 6)
-                            }
-                        }
-                        
-                        HStack(spacing: 0) {
-                            ForEach(0..<tabItems.count, id: \.self) { index in
-                                Button(action: {
-                                    selectedTab = index
-                                }) {
-                                    VStack(spacing: 4) {
-                                        Image(systemName: tabItems[index].icon)
-                                            .font(.system(size: 20, weight: .medium))
-                                            .foregroundColor(selectedTab == index ? .white : Color(hex: "#8E8E93"))
-                                        
-                                        Text(tabItems[index].title)
-                                            .font(.system(size: 12, weight: .medium))
-                                            .foregroundColor(selectedTab == index ? .white : Color(hex: "#8E8E93"))
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 30)
+                                    .fill(Color(hex: "#16181c"))
+                                    .frame(height: 65)
+                                    .shadow(color: Color.black.opacity(0.3), radius: 15, x: 0, y: 5)
+                                
+                                HStack(spacing: 0) {
+                                    ForEach(0..<tabItems.count, id: \.self) { index in
+                                        Capsule()
+                                            .fill(selectedTab == index ? Color(hex: "#0c15b3") : Color.clear)
+                                            .frame(maxWidth: .infinity)
+                                            .frame(height: 55)
+                                            .padding(.horizontal, 4)
+                                            .padding(.vertical, 6)
                                     }
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 50)
+                                }
+                                
+                                HStack(spacing: 0) {
+                                    ForEach(0..<tabItems.count, id: \.self) { index in
+                                        Button(action: {
+                                            selectedTab = index
+                                        }) {
+                                            VStack(spacing: 4) {
+                                                Image(systemName: tabItems[index].icon)
+                                                    .font(.system(size: 20, weight: .medium))
+                                                    .foregroundColor(selectedTab == index ? .white : Color(hex: "#8E8E93"))
+                                                
+                                                Text(tabItems[index].title)
+                                                    .font(.system(size: 12, weight: .medium))
+                                                    .foregroundColor(selectedTab == index ? .white : Color(hex: "#8E8E93"))
+                                            }
+                                            .frame(maxWidth: .infinity)
+                                            .frame(height: 50)
+                                        }
+                                    }
+                                }
+                            }
+                            .frame(maxWidth: .infinity)
+                            
+                            if selectedTab == 0 {
+                                Spacer()
+                                    .frame(width: 16)
+                                Button(action: {
+                                }) {
+                                    Image(systemName: "plus")
+                                        .font(.system(size: 20, weight: .medium))
+                                        .foregroundColor(Color(hex: "#3B82F6"))
+                                        .frame(width: 50, height: 50)
+                                        .background(
+                                            Circle()
+                                                .fill(Color.white)
+                                        )
+                                        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 3)
                                 }
                             }
                         }
-                    }
-                    .frame(maxWidth: .infinity)
-    
-                    if selectedTab == 0 {
-                        Spacer()
-                            .frame(width: 16)
-                        Button(action: {
-                        }) {
-                            Image(systemName: "plus")
-                                .font(.system(size: 20, weight: .medium))
-                                .foregroundColor(Color(hex: "#3B82F6"))
-                                .frame(width: 50, height: 50)
-                                .background(
-                                    Circle()
-                                        .fill(Color.white)
-                                )
-                                .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
-                        }
+                        .padding(.horizontal, 20)
                     }
                 }
-                .padding(.bottom)
+                .ignoresSafeArea(.keyboard, edges: .bottom)
+                
             }
         }
-        .background(Color.black.ignoresSafeArea())
+        
     }
+    
 }
-#Preview {
-    ContentView()
-}
+
+#Preview{ ContentView() }

@@ -37,7 +37,9 @@ struct ChartView: View {
                     x: .value("Category", data.category),
                     y: .value("Value", data.value)
                 )
-                .foregroundStyle(.gray) // Example color
+                .foregroundStyle(
+                    LinearGradient(colors: [.gray,.black], startPoint: .top, endPoint: .bottom)
+                ) // Example color
                 .opacity(0.3) // Low opacity for bars
                 .cornerRadius(8)
             }
