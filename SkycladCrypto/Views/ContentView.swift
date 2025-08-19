@@ -51,13 +51,13 @@ struct ContentView: View {
                 HStack(spacing: 0) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 30)
-                            .fill(Color(hex: "#2C2C2E").opacity(0.8))
+                            .fill(Color(hex: "#16181c"))
                             .frame(height: 65)
                         
                         HStack(spacing: 0) {
                             ForEach(0..<tabItems.count, id: \.self) { index in
                                 Capsule()
-                                    .fill(selectedTab == index ? Color(hex: "#3B82F6") : Color.clear)
+                                    .fill(selectedTab == index ? Color(hex: "#0c15b3") : Color.clear)
                                     .frame(maxWidth: .infinity)
                                     .frame(height: 55)
                                     .padding(.horizontal, 4)
