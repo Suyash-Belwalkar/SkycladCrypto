@@ -13,6 +13,7 @@ struct SwapViewCard: View {
     @State private var selectedCurrencyRecieve = "INR"
     let currency = ["ETH","BTC","INR"]
     @State private var amount: String = ""
+    @FocusState private var isTextFieldFocused: Bool
     
     var body: some View {
         VStack {
@@ -66,9 +67,18 @@ struct SwapViewCard: View {
                     TextField("0", text: $amount)
                                 .font(.system(size: 40, weight: .semibold))
                                 .foregroundStyle(.white)
-                                .keyboardType(.decimalPad) 
+                                .keyboardType(.decimalPad)
                                 .multilineTextAlignment(.leading)
                                 .padding(.leading)
+                                .focused($isTextFieldFocused)
+                                .toolbar {
+                                                        ToolbarItemGroup(placement: .keyboard) {
+                                                            Spacer()
+                                                            Button("Done") {
+                                                                isTextFieldFocused = false 
+                                                            }
+                                                        }
+                                                    }
                     
                     HStack {
                         Text("Balance")
