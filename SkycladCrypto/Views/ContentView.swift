@@ -86,6 +86,7 @@ struct ContentView: View {
                                     ForEach(0..<tabItems.count, id: \.self) { index in
                                         Button(action: {
                                             selectedTab = index
+                                            hapticFeedback()
                                         }) {
                                             VStack(spacing: 4) {
                                                 Image(systemName: tabItems[index].icon)
@@ -108,6 +109,7 @@ struct ContentView: View {
                                 Spacer()
                                     .frame(width: 16)
                                 Button(action: {
+                                    hapticFeedback()
                                 }) {
                                     Image(systemName: "plus")
                                         .font(.system(size: 20, weight: .medium))
@@ -130,6 +132,10 @@ struct ContentView: View {
         }
         
     }
+    private func hapticFeedback() {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+        }
     
 }
 

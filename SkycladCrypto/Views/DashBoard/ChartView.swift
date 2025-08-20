@@ -17,23 +17,23 @@ struct ChartView: View {
     @State private var animateProgress: CGFloat = 0
     
     let barData: [ChartData] = [
-        .init(category: "A", value: 10),
-        .init(category: "B", value: 15),
-        .init(category: "C", value: 12),
-        .init(category: "D", value: 14),
-        .init(category: "E", value: 13),
-        .init(category: "F", value: 17),
-        .init(category: "G", value: 18)
+        .init(category: "24 March", value: 120000),
+        .init(category: "25 March", value: 95000),
+        .init(category: "26 March", value: 135000),
+        .init(category: "27 March", value: 110000),
+        .init(category: "28 March", value: 75000),
+        .init(category: "29 March", value: 142000),
+        .init(category: "30 March", value: 101000)
     ]
 
     let lineData: [ChartData] = [
-        .init(category: "A", value: 2),
-        .init(category: "B", value: 7),
-        .init(category: "C", value: 10),
-        .init(category: "D", value: 12),
-        .init(category: "E", value: 11),
-        .init(category: "F", value: 12),
-        .init(category: "G", value: 15)
+        .init(category: "24 March", value: 45000),
+        .init(category: "25 March", value: 67000),
+        .init(category: "26 March", value: 120000),
+        .init(category: "27 March", value: 88000),
+        .init(category: "28 March", value: 72000),
+        .init(category: "29 March", value: 140000),
+        .init(category: "30 March", value: 96000)
     ]
 
     var body: some View {
@@ -102,12 +102,12 @@ struct ChartView: View {
                    let selectedData = barData.first(where: { $0.category == selectedBar }) {
                     
                     VStack(spacing: 4) {
-                        Text("\(selectedData.value, specifier: "%.0f")")
+                        Text("₹\(selectedData.value, specifier: "%.0f")")
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                         
-                        Text("Category \(selectedBar)")
+                        Text("\(selectedBar)")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
