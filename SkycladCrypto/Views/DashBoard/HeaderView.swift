@@ -59,7 +59,7 @@ struct HeaderView: View {
                             
                     }
                     
-                    Text("$ 134567")
+                    Text("\u{20B9} 134567")
                         .foregroundStyle(.white)
                         .padding(.leading, 30)
                         .font(.largeTitle)

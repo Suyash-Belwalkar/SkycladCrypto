@@ -8,55 +8,40 @@
 import SwiftUI
 
 struct SwapView: View {
+    
+   
     var body: some View {
         VStack(spacing: 15){
             ZStack{
+                SwapViewCard()
                 
-//                UnevenRoundedRectangle(
-//                    topLeadingRadius: 15,
-//                    bottomLeadingRadius: 0,
-//                    bottomTrailingRadius: 0,
-//                    topTrailingRadius: 15
-//                )
-                Rectangle()
-                    .fill(Color(hex:"#151517"))
-                    .frame(width: 380, height: 400)
-                    .cornerRadius(25)
+                            Rectangle()
+                                .fill(.black)
+                                .frame(width: 70, height: 70)
+                                .cornerRadius(15)
                 
-                Rectangle()
-                    .fill(.black)
-                    .frame(width:380, height: 5)
+                            Rectangle()
+                                .fill(.black.opacity(0.5))
+                                .frame(width: 50, height: 50)
+                                .cornerRadius(10)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.white, lineWidth: 1)
+                                )
                 
-                Rectangle()
-                    .fill(.black)
-                    .frame(width: 70, height: 70)
-                    .cornerRadius(15)
-                
-                Rectangle()
-                    .fill(.black.opacity(0.5))
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(10)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.white, lineWidth: 1)
-                    )
-                
-                Image(systemName: "arrow.up.arrow.down")
-                
-                
+                            Image(systemName: "arrow.up.arrow.down")
             }
             
             Button{
-                //Exchanages currency
+                //exchanges coins
             }label: {
                 Text("Exchange")
                     .fontDesign(.monospaced)
-                    
                     .foregroundStyle(.white)
+                    .frame(width: 380, height: 60)
+                    .background(.blue)
+                    .cornerRadius(30)
             }
-            .frame(width: 380, height: 60)
-            .background(.blue)
-            .cornerRadius(30)
             .padding(.bottom)
             
             HStack{

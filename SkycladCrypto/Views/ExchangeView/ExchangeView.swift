@@ -13,7 +13,7 @@ struct ExchangeView: View {
         Transaction(logo: "btcLogo",transactionType: "Receive", title: "BTC", price: "+0.0015",date: "22 March"),
         Transaction(logo: "ethLogo",transactionType: "Sent", title: "ETH", price: "-0.0025",date: "28 March"),
         Transaction(logo: "btcLogo",transactionType: "Sent", title: "BTC", price: "-0.0030",date: "29 March"),
-        Transaction(logo: "inrLogo",transactionType: "Receive", title: "BTC", price: "+30000",date: "30 March"),
+        Transaction(logo: "inrLogo",transactionType: "Receive", title: "BTC", price: "+\u{20B9}30000",date: "30 March"),
         Transaction(logo: "btcLogo",transactionType: "Receive", title: "BTC", price: "+0.0115",date: "31 March"),
         Transaction(logo: "ethLogo",transactionType: "Receive", title: "BTC", price: "+0.0200",date: "2 April"),
        ]

@@ -10,6 +10,8 @@ import SwiftUI
 struct DashBoardView: View {
     
     @State private var currency : String = "USD"
+    @State private var animateBars = false
+    @State private var animateLine = false
     
     let coins = [
            Coin(logo: "btcLogo", title: "Bitcoin (BTC)", price: "₹ 75,62,502.14", change: "+3.2%", changeColor: .green),
@@ -20,7 +22,7 @@ struct DashBoardView: View {
         Transaction(logo: "btcLogo",transactionType: "Receive", title: "BTC", price: "+0.0015",date: "22 March"),
         Transaction(logo: "ethLogo",transactionType: "Sent", title: "ETH", price: "-0.0025",date: "28 March"),
         Transaction(logo: "btcLogo",transactionType: "Sent", title: "BTC", price: "-0.0030",date: "29 March"),
-        Transaction(logo: "inrLogo",transactionType: "Receive", title: "BTC", price: "+30000",date: "30 March"),
+        Transaction(logo: "inrLogo",transactionType: "Receive", title: "INR", price: "+30000",date: "30 March"),
         Transaction(logo: "btcLogo",transactionType: "Receive", title: "BTC", price: "+0.0115",date: "31 March"),
         Transaction(logo: "ethLogo",transactionType: "Receive", title: "BTC", price: "+0.0200",date: "2 April"),
        ]
@@ -35,9 +37,19 @@ struct DashBoardView: View {
                     ContentView2()
                         .padding(.leading)
                     
-                    ChartView()
+                    ChartView(animateBars: animateBars, animateLine: animateLine)
                         .frame(height: 200)
                         .padding(.top, 40)
+                        .onAppear {
+                                withAnimation(.easeOut(duration: 0.8)) {
+                                animateBars = true
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                withAnimation(.easeInOut(duration: 1.2)) {
+                                animateLine = true
+                            }
+                        }
+                    }
                     
                     ScrollView(.horizontal) {
                         HStack(spacing: 15){

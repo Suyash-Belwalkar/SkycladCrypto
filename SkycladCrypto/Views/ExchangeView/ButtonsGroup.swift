@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ButtonsGroup: View {
     var body: some View {
-        HStack{
+        HStack(spacing:16){
             Button{
-               print("hii")
+               //do something
             }label: {
                 Image( systemName: "arrow.up")
                     .foregroundStyle(.gray)
@@ -30,15 +30,16 @@ struct ButtonsGroup: View {
                 Image( systemName: "plus")
                     .foregroundStyle(.gray)
                     .font(.title)
+                    .frame(width:70, height: 70)
+                    .background(.black)
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle()
+                            .stroke(Color.gray.opacity(0.4), lineWidth: 1)
+                    )
                 
             }
-            .frame(width:70, height: 70)
-            .background(.black)
-            .clipShape(Circle())
-            .overlay(
-                Circle()
-                    .stroke(Color.gray.opacity(0.4), lineWidth: 1)
-            )
+           
             
             Button{
                 //sheet present
