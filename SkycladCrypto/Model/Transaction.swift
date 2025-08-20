@@ -11,8 +11,8 @@ import Foundation
 struct Transaction: Identifiable {
     let id = UUID()
     let logo: String
-    let transactionType : String// image name
-    let title: String     // e.g., "Bitcoin (BTC)"
-    let price: String     // e.g., "₹ 75,62,502.14"
+    let transactionType : String
+    let title: String
+    let price: String     
     let date: String
 }

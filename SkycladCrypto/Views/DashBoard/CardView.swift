@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct CardView: View {
-    let logo: String      // image name
-    let title: String     // e.g., "Bitcoin (BTC)"
-    let price: String     // e.g., "₹ 75,62,502.14"
-    let change: String    // e.g., "+3.2%"
-    let changeColor: Color // red or green depending on trend
+    let logo: String
+    let title: String
+    let price: String
+    let change: String
+    let changeColor: Color
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 16)
+            RoundedRectangle(cornerRadius: 12)
                 .fill(Color.black)
-                .frame(width: 240, height: 130)
+                .frame(width: 204, height: 118)
                 .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
@@ -29,32 +29,26 @@ struct CardView: View {
                 HStack {
                     Image(logo)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 50)
-                        .padding(.leading, 10)
+                        .frame(width: 42, height: 42)
+
                     
                     Text(title)
                         .foregroundColor(.white)
-                        .font(.system(size: 18, weight: .medium, design: .monospaced))
-                        .padding(.leading)
-                    
-                    Spacer()
+                        .font(.system(size: 14, design: .monospaced))
                 }
                 
                 HStack {
                     Text(price)
                         .foregroundColor(.white)
-                        .font(.system(size: 18, weight: .bold))
-                        .padding(.leading)
-                    
-                    Spacer()
+                        .font(.system(size: 16))
+//                        .padding(.leading)
                     
                     Text(change)
                         .foregroundColor(changeColor)
-                        .font(.system(size: 16, weight: .semibold))
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .padding(.leading, 5)
+                        .font(.system(size: 12, weight: .semibold))
+//                        .padding(.horizontal, 8)
+//                        .padding(.vertical, 4)
+                        .padding(.leading, 13)
                 }
             }
             .padding(5)
@@ -62,5 +56,7 @@ struct CardView: View {
     }
 }
 
-
+#Preview{
+    CardView(logo: "btcLogo", title: "Bitcoin (BTC)", price: "₹ 75,62,502.14", change: "+3.2%", changeColor: .green)
+}
 

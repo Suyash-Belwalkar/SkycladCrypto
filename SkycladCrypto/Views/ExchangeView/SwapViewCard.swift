@@ -11,11 +11,12 @@ struct SwapViewCard: View {
     
     @State private var selectedCurrencySend = "ETH"
     @State private var selectedCurrencyRecieve = "INR"
-    let currency = ["USD","ETH","BTC","INR"]
+    let currency = ["ETH","BTC","INR"]
+    @State private var amount: String = ""
     
     var body: some View {
-        VStack{
-            ZStack{
+        VStack {
+            ZStack {
                 UnevenRoundedRectangle(
                     topLeadingRadius: 24,
                     bottomLeadingRadius: 0,
@@ -25,20 +26,34 @@ struct SwapViewCard: View {
                 .fill(Color(hex:"#151517"))
                 .frame(width: 361, height: 195)
 
-                VStack(alignment: .leading, spacing: 15){
-                    HStack{
-                        Image("ethLogo")
+                VStack(alignment: .leading, spacing: 15) {
+                    HStack(spacing: 12) {
+                        Image(selectedCurrencySend)
                             .resizable()
                             .frame(width: 42, height: 42)
+                            .padding(.leading)
                         
-                        Picker("Select a Currency", selection: $selectedCurrencySend) {
-                            ForEach(currency, id: \.self) { currency in
-                                Text(currency).tag(currency)
-                                
+                        Menu {
+                            ForEach(currency, id: \.self) { curr in
+                                Button(curr) {
+                                    selectedCurrencySend = curr
+                                }
                             }
+                        } label: {
+                            HStack(spacing: 6) {
+                                Text(selectedCurrencySend)
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 16, weight: .medium))
+                                    .frame(minWidth: 40, alignment: .leading)
+                                
+                                Image(systemName: "chevron.down")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 12))
+                            }
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.clear)
                         }
-                        .frame(width: 95)
-                        .clipped()
                         
                         Spacer()
                         
@@ -47,94 +62,107 @@ struct SwapViewCard: View {
                             .foregroundStyle(.white)
                             .padding(.trailing)
                     }
-                    .padding(.leading)
                     
-                    Text("2.640")
-                        .font(.system(size: 40, weight: .semibold))
-                        .foregroundStyle(.white)
-                        .padding(.leading)
+                    TextField("0", text: $amount)
+                                .font(.system(size: 40, weight: .semibold))
+                                .foregroundStyle(.white)
+                                .keyboardType(.decimalPad) 
+                                .multilineTextAlignment(.leading)
+                                .padding(.leading)
                     
-                    HStack{
+                    HStack {
                         Text("Balance")
                             .font(.system(size: 15, design: .monospaced))
                             .foregroundStyle(.gray)
                             .padding(.leading)
                         Spacer()
                         
-                        Text("10.26")
+                        Text(currencyData[selectedCurrencySend]?.balance ?? "--")
                             .font(.system(size: 15))
                             .foregroundStyle(.gray)
                             .padding(.trailing)
-                        
                     }
                     .padding(.top)
                 }
             }
-            .frame(width:360)
+            .frame(width: 360)
             
-            ZStack{
-                    UnevenRoundedRectangle(
-                        topLeadingRadius: 0,
-                        bottomLeadingRadius: 24,
-                        bottomTrailingRadius: 24,
-                        topTrailingRadius: 0
-                    )
-                    .fill(Color(hex:"#151517"))
-                    .frame(width: 361, height: 195)
-                    
-                VStack(alignment: .leading, spacing: 15){
-                    HStack{
-                        Image("inrLogo")
+            ZStack {
+                UnevenRoundedRectangle(
+                    topLeadingRadius: 0,
+                    bottomLeadingRadius: 24,
+                    bottomTrailingRadius: 24,
+                    topTrailingRadius: 0
+                )
+                .fill(Color(hex:"#151517"))
+                .frame(width: 361, height: 195)
+                
+                VStack(alignment: .leading, spacing: 15) {
+                    HStack(spacing: 12) {
+                        Image(selectedCurrencyRecieve)
                             .resizable()
                             .frame(width: 42, height: 42)
+                            .padding(.leading)
                         
-                        Picker("Select a Currency", selection: $selectedCurrencyRecieve) {
-                            ForEach(currency, id: \.self) { currency in
-                                Text(currency).tag(currency)
-                                    
+                        Menu {
+                            ForEach(currency, id: \.self) { curr in
+                                Button(curr) {
+                                    selectedCurrencyRecieve = curr
+                                }
                             }
+                        } label: {
+                            HStack(spacing: 6) {
+                                Text(selectedCurrencyRecieve)
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 16, weight: .medium))
+                                    .frame(minWidth: 40, alignment: .leading)
+                                
+                                Image(systemName: "chevron.down")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 12))
+                            }
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.clear)
                         }
-                        .frame(width: 95)
-                        .clipped()
                         
                         Spacer()
                         
                         Text("Receive")
+                            .font(.system(size: 14))
                             .fontDesign(.monospaced)
                             .foregroundStyle(.white)
                             .padding(.trailing)
                     }
-                    .padding(.leading)
                     
-                    Text("\u{20B9} 12,34,600")
+                    Text(currencyData[selectedCurrencyRecieve]?.value ?? "--")
                         .font(.system(size: 40, weight: .semibold))
                         .foregroundStyle(.white)
                         .padding(.leading)
                     
-                    HStack{
+                    HStack {
                         Text("Balance")
                             .font(.system(size: 15, design: .monospaced))
                             .foregroundStyle(.gray)
                             .padding(.leading)
                         Spacer()
                         
-                        Text("\u{20B9}15,40,800")
+                        Text(currencyData[selectedCurrencyRecieve]?.balance ?? "--")
                             .font(.system(size: 15))
                             .foregroundStyle(.gray)
                             .padding(.trailing)
-                        
                     }
                     .padding(.top)
                 }
             }
-            .frame(width:360)
-            
-            
-            
+            .frame(width: 360)
         }
     }
 }
 
 #Preview {
-    SwapViewCard()
+    ZStack {
+        Color.black.ignoresSafeArea()
+        SwapViewCard()
+    }
 }

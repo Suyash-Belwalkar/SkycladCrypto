@@ -25,6 +25,7 @@ extension Color {
 
 struct ContentView: View {
     @State private var selectedTab = 0
+    @Environment(\.colorScheme) var colorScheme
     
     let tabItems = [
         (icon: "chart.line.uptrend.xyaxis", title: "Analytics"),
@@ -60,10 +61,15 @@ struct ContentView: View {
                         
                         HStack(spacing: 0) {
                             ZStack {
-                                RoundedRectangle(cornerRadius: 30)
-                                    .fill(Color(hex: "#16181c"))
-                                    .frame(height: 65)
-                                    .shadow(color: Color.black.opacity(0.3), radius: 15, x: 0, y: 5)
+                                HStack{
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .fill(   colorScheme == .dark ?
+                                                 Color(hex: "#16181c") :
+                                                    Color(hex: "#89888f")
+                                        )
+                                        .shadow(color: Color.black.opacity(0.3), radius: 15, x: 0, y: 5)
+                                }
+                                .frame(width:.infinity, height: 63)
                                 
                                 HStack(spacing: 0) {
                                     ForEach(0..<tabItems.count, id: \.self) { index in
@@ -83,12 +89,12 @@ struct ContentView: View {
                                         }) {
                                             VStack(spacing: 4) {
                                                 Image(systemName: tabItems[index].icon)
-                                                    .font(.system(size: 20, weight: .medium))
-                                                    .foregroundColor(selectedTab == index ? .white : Color(hex: "#8E8E93"))
+                                                    .frame(width: 24)
+                                                    .foregroundColor(.white)
                                                 
                                                 Text(tabItems[index].title)
-                                                    .font(.system(size: 12, weight: .medium))
-                                                    .foregroundColor(selectedTab == index ? .white : Color(hex: "#8E8E93"))
+                                                    .font(.system(size: 10, weight: .medium))
+                                                    .foregroundColor(.white)
                                             }
                                             .frame(maxWidth: .infinity)
                                             .frame(height: 50)
@@ -106,7 +112,7 @@ struct ContentView: View {
                                     Image(systemName: "plus")
                                         .font(.system(size: 20, weight: .medium))
                                         .foregroundColor(Color(hex: "#3B82F6"))
-                                        .frame(width: 50, height: 50)
+                                        .frame(width: 62, height: 62)
                                         .background(
                                             Circle()
                                                 .fill(Color.white)

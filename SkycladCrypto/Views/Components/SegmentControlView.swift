@@ -60,6 +60,7 @@ fileprivate struct NewSegmentButtonView<ID: Identifiable, Content: View, Backgro
     var namespace: Namespace.ID
     @ViewBuilder var content: () -> Content
     @ViewBuilder var background: () -> Background
+
     
     
     var body: some View {

@@ -6,18 +6,10 @@
 //
 
 
-//
-//  ContentView.swift
-//  SegmentControl
-//
-//  Created by Pratik on 03/10/22.
-//
-
 import SwiftUI
 
 struct ContentView1: View {
-    @State private var selectedSegment1: Segment = .inr
-    @State private var selectedSegment2: Segment = .inr
+    @Binding var selectedSegment2: Segment
     @State var animation: Animation = .default
     @State var themeColor: Color = .primary
     
@@ -42,6 +34,4 @@ struct ContentView1: View {
     }
 }
 
-#Preview{
-    ContentView1()
-}
+

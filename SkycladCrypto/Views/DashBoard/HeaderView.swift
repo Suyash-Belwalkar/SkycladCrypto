@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct HeaderView: View {
+    
+    @State private var selectedCurrency: Segment = .inr
+     private let inrBalance = "1,34,567"
+     private let btcBalance = "2.45"
+    
     var body: some View {
-        VStack{
             ZStack{
                 Image("dashboardBackground")
                     .resizable()
-                    .frame(width: 380 , height: 300)
-                    .cornerRadius(20)
-                 
-                
+                    .frame(width: 375 , height: 239)
+                    .cornerRadius(24)
+
                 VStack(alignment: .leading){
                     HStack{
                         Button{
@@ -40,7 +43,7 @@ struct HeaderView: View {
                         }
                         .padding(.trailing)
                     }
-                    .padding(.bottom, 100)
+                    .padding(.bottom, 50)
                     .padding(.leading)
                     .padding(.top, 40)
                         
@@ -53,15 +56,16 @@ struct HeaderView: View {
                         
                         Spacer()
                         
-                        ContentView1()
-                            .frame(width: 100 ,height: 40)
+                        ContentView1(selectedSegment2: $selectedCurrency)
+                            .frame(width: 100 ,height: 38)
                             .padding(.trailing, 28)
                             
                     }
                     
-                    Text("\u{20B9} 134567")
+                    Text(displayText)
                         .foregroundStyle(.white)
                         .padding(.leading, 30)
+//                        .padding(.bottom, 50)
                         .font(.largeTitle)
                         .bold()
                 }
@@ -71,9 +75,17 @@ struct HeaderView: View {
                 
             }
             
-            Spacer()
-        }
+           
+        
     }
+    private var displayText: String {
+            switch selectedCurrency {
+            case .inr:
+                return "₹ \(inrBalance)"
+            case .btc:
+                return "₿ \(btcBalance)"
+            }
+        }
 }
 
 #Preview {

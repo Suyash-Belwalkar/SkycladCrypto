@@ -9,7 +9,25 @@ import SwiftUI
 
 struct RecordsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+          Color.black.ignoresSafeArea()
+            
+            VStack(spacing: 12) {
+                Image(systemName: "list.bullet")
+                    .font(.system(size: 40))
+                    .foregroundColor(.gray)
+                
+                Text("Records will be shown here")
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                
+                Text("(Out of scope of Deliverables)")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+            }
+            .multilineTextAlignment(.center)
+            .padding()
+        }
     }
 }
 

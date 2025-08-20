@@ -14,6 +14,7 @@ struct ChartView: View {
     
     @State private var selectedBar: String? = nil
     @State private var selectedValue: Double? = nil
+    @State private var animateProgress: CGFloat = 0
     
     let barData: [ChartData] = [
         .init(category: "A", value: 10),
@@ -38,7 +39,6 @@ struct ChartView: View {
     var body: some View {
         VStack {
             Chart {
-                // Bar marks
                 ForEach(barData) { data in
                     BarMark(
                         x: .value("Category", data.category),
@@ -51,8 +51,7 @@ struct ChartView: View {
                     .opacity(selectedBar == nil || selectedBar == data.category ? 0.3 : 0.15)
                     .cornerRadius(8)
                 }
-                
-                // Line marks
+                         
                 ForEach(lineData) { data in
                     LineMark(
                         x: .value("Category", data.category),
@@ -62,17 +61,14 @@ struct ChartView: View {
                     .opacity(0.8)
                     .interpolationMethod(.catmullRom)
                 }
-                
-                // Selection indicator line and circle for bars only
+                                
                 if let selectedBar = selectedBar,
                    let selectedData = barData.first(where: { $0.category == selectedBar }) {
-                    
-                    // White vertical line
+
                     RuleMark(x: .value("Selected", selectedBar))
                         .foregroundStyle(.white)
                         .lineStyle(StrokeStyle(lineWidth: 2))
-                    
-                    // Circle at the top of selected bar
+
                     PointMark(
                         x: .value("Category", selectedBar),
                         y: .value("Value", selectedData.value)
@@ -84,20 +80,24 @@ struct ChartView: View {
             }
             .frame(height: 200)
             .mask(
-                GeometryReader { geo in
-                    Rectangle()
-                        .frame(width: animateLine ? geo.size.width : 0)
-                        .animation(.easeOut(duration: 2), value: animateLine)
+                    GeometryReader { geo in
+                        Rectangle()
+                            .frame(width: geo.size.width * animateProgress)
+                    }
+                )
+                .padding()
+                .chartXAxis(.hidden)
+                .chartYAxis(.hidden)
+                .onAppear {
+                    animateProgress = 0
+                    withAnimation(.easeOut(duration: 2)) {
+                        animateProgress = 1
+                    }
                 }
-            )
-            .padding()
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
             .onTapGesture { location in
                 handleTap(at: location)
             }
             .overlay(alignment: .top) {
-                // Value annotation
                 if let selectedBar = selectedBar,
                    let selectedData = barData.first(where: { $0.category == selectedBar }) {
                     
@@ -129,15 +129,13 @@ struct ChartView: View {
     }
     
     private func handleTap(at location: CGPoint) {
-        // Calculate which bar was tapped based on location
-        let chartWidth: CGFloat = UIScreen.main.bounds.width - 32 // Accounting for padding
+        let chartWidth: CGFloat = UIScreen.main.bounds.width - 32
         let barSpacing = chartWidth / CGFloat(barData.count)
         let tappedIndex = Int(location.x / barSpacing)
         
         if tappedIndex >= 0 && tappedIndex < barData.count {
             let tappedBar = barData[tappedIndex]
             
-            // Toggle selection
             if selectedBar == tappedBar.category {
                 selectedBar = nil
                 selectedValue = nil
@@ -145,7 +143,6 @@ struct ChartView: View {
                 selectedBar = tappedBar.category
                 selectedValue = tappedBar.value
                 
-                // Add haptic feedback
                 let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
                 impactFeedback.impactOccurred()
             }
